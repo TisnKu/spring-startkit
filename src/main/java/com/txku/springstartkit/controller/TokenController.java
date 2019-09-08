@@ -20,8 +20,7 @@ public class TokenController {
 
     @PostMapping
     public TokenResponse login(@RequestBody LoginRequest request) {
-        tokenService.generateToken(request);
-        // todo
-        return new TokenResponse(String.format("token of: %s + %s", request.getUsername(), request.getPassword()));
+        TokenResponse tokenResponse = tokenService.generateToken(request);
+        return tokenResponse;
     }
 }

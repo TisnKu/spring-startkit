@@ -4,7 +4,6 @@ import com.txku.springstartkit.entity.User;
 import com.txku.springstartkit.repository.UserRepository;
 import com.txku.springstartkit.request.LoginRequest;
 import com.txku.springstartkit.utility.JsonUtil;
-import com.txku.springstartkit.utility.ShaUtil;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +19,7 @@ class TokenControllerTest extends BaseIntegrationTest {
     @BeforeEach
     public void setUp() {
         super.setUp();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -31,19 +31,18 @@ class TokenControllerTest extends BaseIntegrationTest {
                 .post("/api/token")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body("$.token", Matchers.notNullValue());
-
+                .body("token", Matchers.notNullValue());
     }
 
     @Test
-    void should_return_401_when_login_with_incorrect_username_and_password() {
+    void should_return_401_when_login_with_incorrect_username() {
         generateUser();
-        LoginRequest request = new LoginRequest("user1", "password2");
+        LoginRequest request = new LoginRequest("user2", "password2");
         given().body(JsonUtil.stringify(request))
                 .post("/api/token")
                 .then()
                 .statusCode(HttpStatus.UNAUTHORIZED.value())
-                .body("$.message", Matchers.is("Wrong username or credentials"));
+                .body("message", Matchers.is("Invalid username or password."));
 
     }
 
@@ -52,7 +51,7 @@ class TokenControllerTest extends BaseIntegrationTest {
                 .firstName("tianxi")
                 .lastName("haha")
                 .username("user1")
-                .password(ShaUtil.sha("password1"))
+                .password("password1")
                 .build());
     }
 }
