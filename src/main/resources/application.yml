@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    name: startkit
+    url: jdbc:mysql://mysql:3306/startkit
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+  redis:
+    database: 1
+    host: redis
+    port: 6379
