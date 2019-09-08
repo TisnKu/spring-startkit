@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'idea'
 }
 
 group = 'com.txku'
@@ -41,10 +42,27 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
 }
 
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
+}
+
+sourceSets {
+	test {
+		if ('unit' == System.getProperty('mode')) {
+			java.srcDir file('src/test/java')
+			resources.srcDir file('src/test/resources')
+		} else {
+			java.srcDir file('src/test-integration/java')
+			resources.srcDir file('src/test-integration/resources')
+		}
+	}
+}
+
+test {
+	useJUnitPlatform()
 }
