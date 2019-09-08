@@ -5,7 +5,6 @@ import com.txku.springstartkit.repository.UserRepository;
 import com.txku.springstartkit.request.LoginRequest;
 import com.txku.springstartkit.utility.JsonUtil;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,13 +13,6 @@ class TokenControllerTest extends BaseIntegrationTest {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Override
-    @BeforeEach
-    public void setUp() {
-        super.setUp();
-        userRepository.deleteAll();
-    }
 
     @Test
     void should_return_token_response_when_login_with_correct_username_and_password() {
