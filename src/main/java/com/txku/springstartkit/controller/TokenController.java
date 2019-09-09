@@ -20,7 +20,6 @@ public class TokenController {
 
     @PostMapping
     public TokenResponse login(@RequestBody LoginRequest request) {
-        TokenResponse tokenResponse = tokenService.generateToken(request);
-        return tokenResponse;
+        return tokenService.generateToken(request);
     }
 }
