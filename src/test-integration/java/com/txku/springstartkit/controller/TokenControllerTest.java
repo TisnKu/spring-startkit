@@ -3,7 +3,6 @@ package com.txku.springstartkit.controller;
 import com.txku.springstartkit.entity.User;
 import com.txku.springstartkit.repository.UserRepository;
 import com.txku.springstartkit.request.LoginRequest;
-import com.txku.springstartkit.utility.JsonUtil;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ class TokenControllerTest extends BaseIntegrationTest {
         generateUser();
 
         LoginRequest request = new LoginRequest("user1", "password1");
-        given().body(JsonUtil.stringify(request))
+        given().body(request)
                 .post("/api/token")
                 .then()
                 .statusCode(HttpStatus.OK.value())
@@ -30,7 +29,7 @@ class TokenControllerTest extends BaseIntegrationTest {
     void should_return_401_when_login_with_incorrect_username() {
         generateUser();
         LoginRequest request = new LoginRequest("user2", "password2");
-        given().body(JsonUtil.stringify(request))
+        given().body(request)
                 .post("/api/token")
                 .then()
                 .statusCode(HttpStatus.UNAUTHORIZED.value())
