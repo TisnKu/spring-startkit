@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.8.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
-	id 'idea'
+    id 'org.springframework.boot' version '2.1.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id 'idea'
 }
 
 group = 'com.txku'
@@ -10,63 +10,58 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
-	}
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 ext {
-	set('springCloudVersion', "Greenwich.SR2")
+    set('springCloudVersion', "Greenwich.SR2")
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-	implementation 'commons-codec:commons-codec:1.11'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
-	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
-	testImplementation('org.mockito:mockito-junit-jupiter:2.23.4')
-	testImplementation('io.rest-assured:spring-mock-mvc:3+')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'commons-codec:commons-codec:1.11'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
+    testImplementation('org.mockito:mockito-junit-jupiter:2.23.4')
+    testImplementation('io.rest-assured:spring-mock-mvc:3+')
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 sourceSets {
-	test {
-		if ('unit' == System.getProperty('mode')) {
-			java.srcDir file('src/test/java')
-			resources.srcDir file('src/test/resources')
-		} else {
-			java.srcDir file('src/test-integration/java')
-			resources.srcDir file('src/test-integration/resources')
-		}
-	}
+    test {
+        java.srcDir files('src/test/java', 'src/test-integration/java')
+        resources.srcDir files('src/test/resources', 'src/test-integration/resources')
+    }
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
