@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ControllerAdvice {
-    private static final Logger logger = LoggerFactory.getLogger(ControllerAdvice.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ControllerAdvice.class);
 
-    @ExceptionHandler(value = StartkitException.class)
+    @ExceptionHandler(StartkitException.class)
     public ResponseEntity handleStartkitRuntimeException(StartkitException exception) {
-        logger.error(exception.getMessage(), exception);
+        LOGGER.error(exception.getMessage(), exception);
         return ResponseEntity.status(exception.getStatus())
                 .body(exception);
     }
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     public ResponseEntity handleException(Exception exception) {
-        logger.error(exception.getMessage(), exception);
+        LOGGER.error(exception.getMessage(), exception);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(exception);
     }

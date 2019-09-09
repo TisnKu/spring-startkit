@@ -10,27 +10,27 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class JsonUtil {
-    private static final ObjectMapper objectMapper = new ObjectMapper()
+public class JsonHelper {
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-    private static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonHelper.class);
 
     public static <T> T parse(String jsonString, Class<T> type) throws IOException {
-        return objectMapper.readValue(jsonString, type);
+        return OBJECT_MAPPER.readValue(jsonString, type);
     }
 
     public static <T> T parse(String jsonString, TypeReference<T> type) throws IOException {
-        return objectMapper.readValue(jsonString, type);
+        return OBJECT_MAPPER.readValue(jsonString, type);
     }
 
     public static String stringify(Object object) {
         try {
-            return objectMapper.writeValueAsString(object);
+            return OBJECT_MAPPER.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            logger.error(e.getMessage(), e);
-            return null;
+            LOGGER.error(e.getMessage(), e);
         }
+        return null;
     }
 }
