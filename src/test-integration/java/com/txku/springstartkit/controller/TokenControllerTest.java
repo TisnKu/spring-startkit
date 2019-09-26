@@ -19,10 +19,10 @@ class TokenControllerTest extends BaseIntegrationTest {
 
         LoginRequest request = new LoginRequest("user1", "password1");
         given().body(request)
-                .post("/api/token")
-                .then()
-                .statusCode(HttpStatus.OK.value())
-                .body("token", Matchers.notNullValue());
+            .post("/api/token")
+            .then()
+            .statusCode(HttpStatus.OK.value())
+            .body("token", Matchers.notNullValue());
     }
 
     @Test
@@ -30,19 +30,19 @@ class TokenControllerTest extends BaseIntegrationTest {
         generateUser();
         LoginRequest request = new LoginRequest("user2", "password2");
         given().body(request)
-                .post("/api/token")
-                .then()
-                .statusCode(HttpStatus.UNAUTHORIZED.value())
-                .body("message", Matchers.is("Invalid username or password."));
+            .post("/api/token")
+            .then()
+            .statusCode(HttpStatus.UNAUTHORIZED.value())
+            .body("message", Matchers.is("Invalid username or password."));
 
     }
 
     private void generateUser() {
         userRepository.save(User.builder()
-                .firstName("tianxi")
-                .lastName("haha")
-                .username("user1")
-                .password("password1")
-                .build());
+            .firstName("tianxi")
+            .lastName("haha")
+            .username("user1")
+            .password("password1")
+            .build());
     }
 }

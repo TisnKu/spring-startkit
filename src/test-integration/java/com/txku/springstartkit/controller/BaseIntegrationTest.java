@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest
@@ -19,15 +18,10 @@ import org.springframework.web.context.WebApplicationContext;
 @AutoConfigureTestDatabase
 public class BaseIntegrationTest {
     @Autowired
-    protected MockMvc mockMvc;
-
-    @Autowired
     private WebApplicationContext context;
 
     @BeforeEach
     public void setUp() {
-        RestAssuredMockMvc.mockMvc(mockMvc);
-        RestAssuredMockMvc.standaloneSetup();
         RestAssuredMockMvc.webAppContextSetup(context);
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
     }

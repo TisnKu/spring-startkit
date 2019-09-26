@@ -42,4 +42,5 @@ class TokenServiceTest {
         assertEquals("Invalid username or password.", startkitException.getMessage());
         assertEquals(HttpStatus.UNAUTHORIZED, startkitException.getStatus());
     }
+
 }
