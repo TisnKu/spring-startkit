@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'pmd'
+    id "org.sonarqube" version "2.7"
 }
 
 group = 'com.txku'
